@@ -1,61 +1,36 @@
+<!-- Created a simple interest calculator using dom functions -->
+
 <!DOCTYPE html>
 <html>
+    <head>
+        <title>Simple Interest Calculator</title>
+    </head>
+    <body>
+        <input type="text" placeholder="Principal Amount" id="principal"></input><br><br>
+        <input type="text" placeholder="Rate of Interest (% per annum)" id="rate"></input><br><br>
+        <input type="text" placeholder="Time (years)" id="time"></input><br><br>
+        <button onclick="calculateInterest()">Calculate Interest</button>
+        <div id="result"></div>
+    </body>
+    <script>
+        function calculateInterest(){
+            let principal = document.getElementById('principal').value;
+            let rate = document.getElementById('rate').value;
+            let time = document.getElementById('time').value;
 
-<head>
-  <script>
-    let globalId = 1;
-    let todoState = [];
-    let oldTodoState = [];
+            // Validating inputs
+            if (principal === '' || rate === '' || time === '' || isNaN(principal) || isNaN(rate) || isNaN(time)) {
+                document.getElementById('result').innerHTML = "Please enter valid numbers.";
+                return;
+            }
 
-    function addTodoToDom() {
-      
-    }
+            principal = parseFloat(principal);
+            rate = parseFloat(rate);
+            time = parseFloat(time);
 
-    function removeTodoFromDom(todo) {
-      
-    }
-
-    function updateTodoInDom(oldTodo, newTodo) {
-        
-    }
-
-    function updateState(newTodos) {
-      // calculate the diff b/w newTodos and oldTodos.
-      // More specifically, find out what todos are - 
-      // 1. added
-      // 2. deleted
-      // 3. updated
-      const added = [];
-      const deleted = [];
-      const updated = [];
-      // calculate these 3 arrays
-      // call addTodo, removeTodo, updateTodo functions on each of the
-      // elements
-      oldTodoState = newTodos;
-    }
-
-    function addTodo() {
-      const title = document.getElementById("title").value;
-      const description = document.getElementById("description").value;
-      todoState.push({
-        title: title,
-        description: description,
-        id: globalId++,
-      })
-      updateState(todoState);
-    }
-  </script>
-</head>
-
-<body>
-  <input type="text" id="title" placeholder="Todo title"></input> <br /><br />
-  <input type="text" id="description" placeholder="Todo description"></input> <br /><br />
-  <button onclick="addTodo()">Add todo</button>
-  <br /> <br />
-
-  <div id="todos">
-
-  </div>
-</body>
-
+            let interest = (principal * rate * time) / 100;
+            console.log(interest);
+            document.getElementById('result').innerHTML = "The simple interest is " + interest.toFixed(2);
+        }
+    </script>
 </html>
